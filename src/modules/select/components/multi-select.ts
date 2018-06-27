@@ -129,10 +129,14 @@ export class SuiMultiSelect<T, U> extends SuiSelectBase<T, U> implements ICustom
         const message = this._localizationService.interpolate(
             this.localeValues.multi.selectedMessage,
             [["count", this.selectedOptions.length.toString()]]);
-        if (!this._placeholder) {
-            return message;
+        if (this._placeholder) {
+            if (this.selectedOptions.length === 0) {
+                return message.replace(/0 selections/gi,  `Select ${this._placeholder}`);
+            } else {
+                return message.replace(/selections/gi, this._placeholder);
+            }
         } else {
-            return message.replace(/selections/gi, this._placeholder);
+            return message;
         }
     }
 
