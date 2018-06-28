@@ -111,6 +111,27 @@ export class SuiMultiSelect<T, U> extends SuiSelectBase<T, U> implements ICustom
     @Input()
     public maxSelected:number;
 
+    private _showCountText:string;
+    private _showText:string;
+
+    @Input()
+    public get showCountText():string {
+        return this._showCountText;
+    }
+
+    public set showCountText(showCountText:string) {
+        this._showCountText = showCountText;
+    }
+
+    @Input()
+    public get showText():string {
+        return this._showText || this.localeValues.multi.placeholder;
+    }
+
+    public set showText(showText:string) {
+        this._showText = `#{count} ${showText}`;
+    }
+
     public get maxSelectedReached():boolean {
         if (this.maxSelected == undefined) {
             // If there is no maximum then we can immediately return.
@@ -126,17 +147,14 @@ export class SuiMultiSelect<T, U> extends SuiSelectBase<T, U> implements ICustom
     }
 
     public get selectedMessage():string {
-        const message = this._localizationService.interpolate(
-            this.localeValues.multi.selectedMessage,
-            [["count", this.selectedOptions.length.toString()]]);
-        if (this._placeholder) {
-            if (this.selectedOptions.length === 0) {
-                return message.replace(/0 selections/gi,  `Select ${this._placeholder}`);
-            } else {
-                return message.replace(/selections/gi, this._placeholder);
-            }
+        if (this.selectedOptions.length  > 0) {
+            return this._localizationService.interpolate(
+                this._showText ? this._showText : this.localeValues.multi.selectedMessage,
+                [["count", this.selectedOptions.length.toString()]]);
         } else {
-            return message;
+            return this._localizationService.interpolate(
+                this._showText ? this._showText : this.localeValues.multi.selectedMessage,
+                [["count", this._showCountText ? this._showCountText : this.selectedOptions.length.toString()]]);
         }
     }
 
