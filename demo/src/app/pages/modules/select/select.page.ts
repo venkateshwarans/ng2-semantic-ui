@@ -22,10 +22,12 @@ const exampleStandardTemplate = `
         <sui-multi-select class="selection"
                           [(ngModel)]="selectedOptions"
                           [options]="options"
+                          zeroSelectionText="Select"
                           labelField="name"
                           [isSearchable]="searchable"
                           [isDisabled]="disabled"
                           [hasLabels]="!hideLabels"
+                          
                           #multiSelect>
             <sui-select-option *ngFor="let option of multiSelect.filteredOptions"
                                [value]="option">
@@ -39,11 +41,12 @@ const exampleStandardTemplate = `
         <sui-multi-select class="selection"
                           [(ngModel)]="selectedOptions"
                           [options]="options"
-                          placeholder = "placeholder"
+                          defaultSelectionText="test"
                           labelField="name"
                           [isSearchable]="searchable"
                           [isDisabled]="disabled"
                           [hasLabels]="!hideLabels"
+                          zeroSelectionText="Select"
                           #multiSelect>
             <sui-select-option *ngFor="let option of multiSelect.filteredOptions"
                                [value]="option">
@@ -352,6 +355,20 @@ export class SelectPage {
                     defaultValue: "true"
                 },
                 {
+                    name: "zeroSelectionText",
+                    type: "string",
+                    description: "Display text when no value is selected. " +
+                                                     "Eg:- If we pass a value 'Select', it will display Select selections instead of " +
+                                                     "0 selections"
+                },
+                {
+                    name: "defaultSelectionText",
+                    type: "string",
+                    description: "Display text with count. " +
+                                                     "Eg:- If we pass a value 'Test', it will display 0 Test instead of " +
+                                                     "0 selections"
+                },
+                {
                     name: "maxSelected",
                     type: "number",
                     description: "Sets the maximum number of values that can be selected at any one time."
@@ -472,6 +489,8 @@ export class SelectExampleStandard {
     public selectedOption:IOption;
     public selectedOptions:IOption[];
     public placeholder:string;
+    public defaultSelectionText:string;
+    public zeroSelectionText:string;
     public searchable:boolean = false;
     public disabled:boolean = false;
     public hideLabels:boolean = false;
