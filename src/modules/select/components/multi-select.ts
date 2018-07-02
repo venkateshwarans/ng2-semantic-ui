@@ -111,25 +111,25 @@ export class SuiMultiSelect<T, U> extends SuiSelectBase<T, U> implements ICustom
     @Input()
     public maxSelected:number;
 
-    private _showCountText:string;
-    private _showText:string;
+    private _zeroSelectionText:string;
+    private _defaultSelectionText:string;
 
     @Input()
-    public get showCountText():string {
-        return this._showCountText;
+    public get zeroSelectionText():string {
+        return this._zeroSelectionText;
     }
 
-    public set showCountText(showCountText:string) {
-        this._showCountText = showCountText;
+    public set zeroSelectionText(zeroSelectionText:string) {
+        this._zeroSelectionText = zeroSelectionText;
     }
 
     @Input()
-    public get showText():string {
-        return this._showText || this.localeValues.multi.placeholder;
+    public get defaultSelectionText():string {
+        return this._defaultSelectionText || this.localeValues.multi.placeholder;
     }
 
-    public set showText(showText:string) {
-        this._showText = `#{count} ${showText}`;
+    public set defaultSelectionText(defaultSelectionText:string) {
+        this._defaultSelectionText = `#{count} ${defaultSelectionText}`;
     }
 
     public get maxSelectedReached():boolean {
@@ -149,12 +149,12 @@ export class SuiMultiSelect<T, U> extends SuiSelectBase<T, U> implements ICustom
     public get selectedMessage():string {
         if (this.selectedOptions.length  > 0) {
             return this._localizationService.interpolate(
-                this._showText ? this._showText : this.localeValues.multi.selectedMessage,
+                this._defaultSelectionText ? this._defaultSelectionText : this.localeValues.multi.selectedMessage,
                 [["count", this.selectedOptions.length.toString()]]);
         } else {
             return this._localizationService.interpolate(
-                this._showText ? this._showText : this.localeValues.multi.selectedMessage,
-                [["count", this._showCountText ? this._showCountText : this.selectedOptions.length.toString()]]);
+                this._defaultSelectionText ? this._defaultSelectionText : this.localeValues.multi.selectedMessage,
+                [["count", this._zeroSelectionText ? this._zeroSelectionText : this.selectedOptions.length.toString()]]);
         }
     }
 

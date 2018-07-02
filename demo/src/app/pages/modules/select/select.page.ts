@@ -22,7 +22,7 @@ const exampleStandardTemplate = `
         <sui-multi-select class="selection"
                           [(ngModel)]="selectedOptions"
                           [options]="options"
-                          showCountText="Select"
+                          zeroSelectionText="Select"
                           labelField="name"
                           [isSearchable]="searchable"
                           [isDisabled]="disabled"
@@ -41,12 +41,12 @@ const exampleStandardTemplate = `
         <sui-multi-select class="selection"
                           [(ngModel)]="selectedOptions"
                           [options]="options"
-                          showText="test"
+                          defaultSelectionText="test"
                           labelField="name"
                           [isSearchable]="searchable"
                           [isDisabled]="disabled"
                           [hasLabels]="!hideLabels"
-                          showCountText="Select"
+                          zeroSelectionText="Select"
                           #multiSelect>
             <sui-select-option *ngFor="let option of multiSelect.filteredOptions"
                                [value]="option">
@@ -355,14 +355,14 @@ export class SelectPage {
                     defaultValue: "true"
                 },
                 {
-                    name: "showCountText",
+                    name: "zeroSelectionText",
                     type: "string",
                     description: "Display text when no value is selected. " +
                                                      "Eg:- If we pass a value 'Select', it will display Select selections instead of " +
                                                      "0 selections"
                 },
                 {
-                    name: "showText",
+                    name: "defaultSelectionText",
                     type: "string",
                     description: "Display text with count. " +
                                                      "Eg:- If we pass a value 'Test', it will display 0 Test instead of " +
@@ -489,8 +489,8 @@ export class SelectExampleStandard {
     public selectedOption:IOption;
     public selectedOptions:IOption[];
     public placeholder:string;
-    public showText:string;
-    public showCountText:string;
+    public defaultSelectionText:string;
+    public zeroSelectionText:string;
     public searchable:boolean = false;
     public disabled:boolean = false;
     public hideLabels:boolean = false;
