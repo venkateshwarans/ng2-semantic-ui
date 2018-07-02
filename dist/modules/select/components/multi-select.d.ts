@@ -14,6 +14,10 @@ export declare class SuiMultiSelect<T, U> extends SuiSelectBase<T, U> implements
     private _placeholder;
     placeholder: string;
     maxSelected: number;
+    private _zeroSelectionText;
+    private _defaultSelectionText;
+    zeroSelectionText: string;
+    defaultSelectionText: string;
     readonly maxSelectedReached: boolean;
     readonly maxSelectedMessage: string;
     readonly selectedMessage: string;

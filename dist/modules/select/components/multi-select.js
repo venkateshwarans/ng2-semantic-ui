@@ -69,6 +69,26 @@ var SuiMultiSelect = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(SuiMultiSelect.prototype, "zeroSelectionText", {
+        get: function () {
+            return this._zeroSelectionText;
+        },
+        set: function (zeroSelectionText) {
+            this._zeroSelectionText = zeroSelectionText;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SuiMultiSelect.prototype, "defaultSelectionText", {
+        get: function () {
+            return this._defaultSelectionText || this.localeValues.multi.placeholder;
+        },
+        set: function (defaultSelectionText) {
+            this._defaultSelectionText = "#{count} " + defaultSelectionText;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(SuiMultiSelect.prototype, "maxSelectedReached", {
         get: function () {
             if (this.maxSelected == undefined) {
@@ -89,12 +109,11 @@ var SuiMultiSelect = /** @class */ (function (_super) {
     });
     Object.defineProperty(SuiMultiSelect.prototype, "selectedMessage", {
         get: function () {
-            var message = this._localizationService.interpolate(this.localeValues.multi.selectedMessage, [["count", this.selectedOptions.length.toString()]]);
-            if (!this._placeholder) {
-                return message;
+            if (this.selectedOptions.length > 0) {
+                return this._localizationService.interpolate(this._defaultSelectionText ? this._defaultSelectionText : this.localeValues.multi.selectedMessage, [["count", this.selectedOptions.length.toString()]]);
             }
             else {
-                return message.replace(/selections/gi, this._placeholder);
+                return this._localizationService.interpolate(this._defaultSelectionText ? this._defaultSelectionText : this.localeValues.multi.selectedMessage, [["count", this._zeroSelectionText ? this._zeroSelectionText : this.selectedOptions.length.toString()]]);
             }
         },
         enumerable: true,
@@ -200,6 +219,8 @@ var SuiMultiSelect = /** @class */ (function (_super) {
         "hasLabels": [{ type: Input },],
         "placeholder": [{ type: Input },],
         "maxSelected": [{ type: Input },],
+        "zeroSelectionText": [{ type: Input },],
+        "defaultSelectionText": [{ type: Input },],
         "_multiSelectClasses": [{ type: HostBinding, args: ["class.multiple",] },],
     };
     return SuiMultiSelect;
