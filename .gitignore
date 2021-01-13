@@ -1,7 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/dist
+# /dist
 /tmp
 
 ## ngc logs
@@ -33,7 +33,7 @@ testem.log
 Thumbs.db
 
 # non TS files
-*.d.ts
+# *.d.ts
 *.metadata.json
 *.js
 *.js.map
