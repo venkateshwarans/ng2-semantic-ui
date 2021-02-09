@@ -67,20 +67,20 @@ export class SuiCheckbox implements ICustomValueAccessorHost<boolean> {
     }
 
     @HostListener("mousedown", ["$event"])
-    public onMouseDown(e:MouseEvent):void {
-        e.preventDefault();
+    public onMouseDown(event):void {
+        event.preventDefault();
     }
 
-    @HostListener("click")
-    public onClick():void {
+    @HostListener("click", ["$event"])
+    public onClick(e):void {
         if (!this.isDisabled && !this.isReadonly) {
             this.toggle();
             this.focusCheckbox();
         }
     }
 
-    @HostListener("focusout")
-    public onFocusOut():void {
+    @HostListener("focusout", ["$event"])
+    public onFocusOut(e):void {
         this.onTouched.emit();
     }
 
