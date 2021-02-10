@@ -34,8 +34,6 @@ Thumbs.db
 
 # non TS files
 # *.d.ts
-*.js
-*.js.map
 !*.conf.js
 
 # build scripts
