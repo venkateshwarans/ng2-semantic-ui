@@ -106,7 +106,7 @@ export class SuiDropdownMenu extends SuiTransition implements AfterContentInit, 
                 this.onParentKeyDown(e));
     }
 
-    @ContentChildren(SuiDropdownMenuItem)
+    @ContentChildren(SuiDropdownMenuItem, {descendants: true})
     private _itemsQueryInternal:QueryList<SuiDropdownMenuItem>;
 
     private _itemsQueryOverride:QueryList<SuiDropdownMenuItem>;

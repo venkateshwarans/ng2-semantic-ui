@@ -45,7 +45,7 @@ export class SuiAccordion implements AfterContentInit {
 
     protected _service:SuiAccordionService;
 
-    @ContentChildren(SuiAccordionPanel)
+    @ContentChildren(SuiAccordionPanel, {descendants: true})
     protected _panels:QueryList<SuiAccordionPanel>;
 
     constructor() {
