@@ -12,9 +12,9 @@ export declare class SuiCheckbox implements ICustomValueAccessorHost<boolean> {
     readonly isDisabledAttribute: string | undefined;
     private _checkboxElement;
     constructor();
-    onMouseDown(e: MouseEvent): void;
-    onClick(): void;
-    onFocusOut(): void;
+    onMouseDown(event: any): void;
+    onClick(e: any): void;
+    onFocusOut(e: any): void;
     toggle(): void;
     writeValue(value: boolean): void;
     private focusCheckbox();
